@@ -4,7 +4,7 @@ from telethon.sessions import StringSession
 # ========== ڕێکخستنەکان ==========
 api_id = 33774652
 api_hash = "c438941d8f43a0ff59fcc4b3f3c2fb42"
-session = "1ApWapzMBu7tnnTN-VB0X7gG4nlVdgNXk00LgF5kodgSZFDzWCPM0TItPt7ZpF1Uo9TKGaF-Y4Icm48oTRkhcRNSmz2cEkMKoRibSCerOFnsv1W-yRIheuNUCxeSGGQMA1eRfyk0a0VX5ZD4W1FfGOSasFjx_QoVrxx36hEkYWrNe1ktIWausmtwHkE57PvkbYuUYU8VPv1eQYnzg4_mPChXeFfwWXBj3U1OwPeq7QYNGrWCnrRJA61hyuBiUP_VVmag-pCDSMAMHeqE_3eVBKFh9s9dSsUPEpN8XEAe1JAtxkLDs1pGesPepQpsAclBa_y-n8qHulQvw_gfV8l8Q82HXAuNEv5g="
+session = "1ApWapzMBu55FFH32tbL7Qe15_IRzlscaRYhiHz_QGKffwE-uEKyG1tZ4-UiC5djhP8OnwIbPXlxPMM9oAM1ILtMK07BaLyOGkPjwtTU0oEaqsawX3w32enHteG1QjbFzBRoAV5rU-DiJmfqC305ZagiNOA8FAD4_LHMciBXldNTnA_y3mHlo9cpECRpZDrSa5QiSmxJcIKZDpy1luABObuVeiUr-hetJhk402ZmFJ2Iky-yqT_dBwaYberLfdQqTyQQoNWpIrwHt0bXsL6UqJCRgnjUGYb5iqMC5arNfofRvCKFGZwoFXWPHrOpYKnvTnnV1fi23tJ_UqJFIk5JLgZ03Nv3xJ3c="
 # ===================================
 
 SOURCE_CHANNELS = ["@SlimeChkGroup"]   # گروپی سەرچاوە
