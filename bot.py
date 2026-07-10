@@ -9,9 +9,7 @@ session = "1ApWapzMBu55FFH32tbL7Qe15_IRzlscaRYhiHz_QGKffwE-uEKyG1tZ4-UiC5djhP8On
 
 SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
 TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج
-
-# ناوی ئەو ئەدمینەی کە دەتەوێت پەیامەکانی کۆپی بکەیت
-TARGET_ADMIN = "CC POSTER bot"
+TARGET_ADMIN = "@CC_posterBOT"       # ناوی ئەو بۆتەی کە دەتەوێت پەیامەکانی کۆپی بکەیت
 
 client = TelegramClient(StringSession(session), api_id, api_hash)
 
@@ -20,12 +18,14 @@ async def handler(event):
     msg = event.message
     text = msg.text or ""
 
-    # **پشکنین: ئایا پەیامەکە لەلایەن ئەو ئەدمینەوە نێردراوە؟**
-    # پێویستە ناوی ئەدمینەکە لە دەقەکەدا هەبێت، یان لە ناوی نێردراو (sender)دا هەبێت
-    if TARGET_ADMIN not in text:
+    # پشکنین: تەنها پەیامێک کە لەلایەن TARGET_ADMINـەوە نێردراوە
+    if not event.message.sender:
+        return
+    sender_username = event.message.sender.username
+    if sender_username != "CC_posterBOT":
         return
 
-    # گۆڕینی ناوەکان (ئەگەر پێویست بوو)
+    # گۆڕینی ناوەکان (بەپێی خواستی تۆ)
     new_text = text
     new_text = new_text.replace("CC POSTER bot", "Warven Scrapper")
     new_text = new_text.replace("@CCsPoster", "@cciraq73")
