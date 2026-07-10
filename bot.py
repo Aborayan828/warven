@@ -8,7 +8,7 @@ session = "1ApWapzMBu55FFH32tbL7Qe15_IRzlscaRYhiHz_QGKffwE-uEKyG1tZ4-UiC5djhP8On
 # ===================================
 
 SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
-TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج
+TARGET_CHANNEL = "@CVC428"           # گروپی ئامانج (گۆڕدرا)
 TARGET_ADMIN = "@CC_posterBOT"       # ناوی ئەو بۆتەی کە دەتەوێت پەیامەکانی کۆپی بکەیت
 
 client = TelegramClient(StringSession(session), api_id, api_hash)
@@ -28,7 +28,7 @@ async def handler(event):
     # گۆڕینی ناوەکان (بەپێی خواستی تۆ)
     new_text = text
     new_text = new_text.replace("CC POSTER bot", "Warven Scrapper")
-    new_text = new_text.replace("@CCsPoster", "@cciraq73")
+    new_text = new_text.replace("@CCsPoster", "@CVC428")
 
     if msg.media:
         data = await msg.download_media(file=bytes)
