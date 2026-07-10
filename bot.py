@@ -1,6 +1,5 @@
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
-import re
 
 # ========== ڕێکخستنەکان ==========
 api_id = 33774652
@@ -11,6 +10,9 @@ session = "1ApWapzMBu55FFH32tbL7Qe15_IRzlscaRYhiHz_QGKffwE-uEKyG1tZ4-UiC5djhP8On
 SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
 TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج
 
+# ناوی ئەو ئەدمینەی کە دەتەوێت پەیامەکانی کۆپی بکەیت
+TARGET_ADMIN = "CC POSTER bot"
+
 client = TelegramClient(StringSession(session), api_id, api_hash)
 
 @client.on(events.NewMessage(chats=SOURCE_CHANNEL))
@@ -18,12 +20,12 @@ async def handler(event):
     msg = event.message
     text = msg.text or ""
 
-    # پشکنینی کارت (تەنها ئەو پەیامانەی کە فۆرماتی کارتیان تێدایە)
-    card_pattern = r'(\d{16,19})\|(\d{2})\|(\d{2,4})\|(\d{3,4})'
-    if not re.search(card_pattern, text):
+    # **پشکنین: ئایا پەیامەکە لەلایەن ئەو ئەدمینەوە نێردراوە؟**
+    # پێویستە ناوی ئەدمینەکە لە دەقەکەدا هەبێت، یان لە ناوی نێردراو (sender)دا هەبێت
+    if TARGET_ADMIN not in text:
         return
 
-    # گۆڕینی ناوەکان بۆ ناوی خۆت
+    # گۆڕینی ناوەکان (ئەگەر پێویست بوو)
     new_text = text
     new_text = new_text.replace("CC POSTER bot", "Warven Scrapper")
     new_text = new_text.replace("@CCsPoster", "@cciraq73")
