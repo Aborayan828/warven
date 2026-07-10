@@ -1,5 +1,6 @@
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
+import re  # بۆ پشکنینی دەقەکان
 
 # ========== ڕێکخستنەکان ==========
 api_id = 33774652
@@ -15,8 +16,16 @@ client = TelegramClient(StringSession(session), api_id, api_hash)
 @client.on(events.NewMessage(chats=SOURCE_CHANNEL))
 async def handler(event):
     msg = event.message
+    text = msg.text or ""
 
-    new_text = msg.text or ""
+    # **پشکنین: ئایا دەقەکە فۆرماتی کارتی تێدایە؟**
+    # پشکنینی ژمارەی کارت بە فۆرمات: 16-19 ژمارە + | + مانگ + | + ساڵ + | + CVV
+    card_pattern = r'(\d{16,19})\|(\d{2})\|(\d{2,4})\|(\d{3,4})'
+    if not re.search(card_pattern, text):
+        return  # ئەگەر کارت نییە، پشتگوێی بخە و هیچ مەنێرە
+
+    # گۆڕینی ناوەکان (ئەگەر ویستت)
+    new_text = text
     new_text = new_text.replace("@About_Warnisx", "@warven_24")
     new_text = new_text.replace("@Warnisx", "@warven_24")
 
