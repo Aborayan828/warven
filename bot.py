@@ -2,6 +2,7 @@ from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 import asyncio
 import os
+import time  # زیادکرا بۆ چارەسەری کێشەکە
 
 # ========== ڕێکخستنەکان ==========
 API_ID = 33790522
@@ -28,7 +29,8 @@ async def main():
 
         try:
             if msg.media:
-                data = await msg.download_media(file=bytes)
+                # گۆڕانکاری: file=bytes لابرا بۆ ئەوەی بە شێوەیەکی ڕاست کار بکات
+                data = await msg.download_media()
                 await client.send_file(
                     TARGET_CHANNEL,
                     data,
@@ -52,9 +54,10 @@ async def main():
         print(f"❌ Disconnected: {e}")
         await asyncio.sleep(5)
 
+# گۆڕانکاری لەم بەشەدا: await asyncio.sleep(10) گۆڕدرا بۆ time.sleep(10)
 while True:
     try:
         asyncio.run(main())
     except Exception as e:
         print(f"❌ Bot crashed: {e}")
-        await asyncio.sleep(10)
+        time.sleep(10)
