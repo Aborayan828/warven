@@ -6,12 +6,12 @@ import time
 # ========== ڕێکخستنەکان ==========
 api_id = 33774652
 api_hash = "c438941d8f43a0ff59fcc4b3f3c2fb42"
-session = "1ApWapzMBu8bLXyvUexeoeWtJuBGN17yD0CXU1KZxRmmx_qnTRccKFVcogm7QQmJvAnME5agDdHEsuJH6mOkp1ZJLfK0qr7J9vaKi8au3ha4eylMcfuDyT3dtKYuoOHw-xY4Y5vQirkuaFefSHAlvqhNXXiTixsK22sXKSRCbi5cNFDLq0BXB1IRZvS8D36g7qw52U8joP9dLwpRy_N60_cXA1aisuZhCnzWbpjvyiL39tZ6xxDW0ev_RGw4S8ZIZf-zjmHHAmZJ-GtMwqyI5qIf3vXKspkYnSX17wyRkRLG7lv5xhUHRapIGO3UF0IIW5KJrRaLa3AuebRzndY16SesgFXkkkR8="
+session = "1ApWapzMBu4ZtNLp3EZDQrrBRkDtW9sbdz2VmWZc2qzPABGi22sgzNQCjBmjQIxW3096aEsgOy06c4IR37k0NNBH2Vn878Evv0fHDGWOG0KAUvK60ScMsRULv96P3HgQyBFEs1Nn2YeHFTFXZJJAI1z9msxfmbEYmB4CLz976vqfN0_bfRi2yYAIYrCeImLzhYTvORtGO6O_Qn3hirNDeinLkkQsqxw94xCUwgy483Fn8EIxkgyy9qzCq2cBUGrudhLqibUHVg3TbacPfKNgtg57z972qBBotYpa4RaZievxaVfrxgIClOYRogtC64keKnUuna4FR5C03nDDd3RUsTCBMvD5ZuPM="
 # ===================================
 
-SOURCE_CHANNEL = "@xforcegroupBOT"
-TARGET_CHANNEL = "@CVC428"
-TARGET_ADMIN = "@CC_posterBOT"
+SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
+TARGET_CHANNEL = "@CVC428"           # گروپی ئامانج
+TARGET_ADMIN = "@CC_posterBOT"       # ناوی بۆتی تایبەت
 
 async def main():
     client = TelegramClient(StringSession(session), api_id, api_hash)
@@ -57,7 +57,6 @@ async def main():
         print(f"❌ Disconnected: {e}")
         print("🔄 Reconnecting in 5 seconds...")
         await asyncio.sleep(5)
-        # دووبارە دەستپێکردنەوە
 
 # گەر بۆتەکە کەوت، خۆکارانە دووبارە دەستپێدەکاتەوە
 while True:
