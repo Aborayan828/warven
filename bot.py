@@ -6,10 +6,10 @@ import os
 # ========== ڕێکخستنەکان ==========
 API_ID = 33790522
 API_HASH = '00e4131295f55452e143c06099c1ddae'
-SESSION_STRING = os.environ.get('SESSION_STRING')
+SESSION_STRING = "1ApWapzMBu6FHA0TJuXxK6WEt68lZLodw-AaNiJUDghsVoqZTQu2dvKcfh-tsXst9Dall4nPZSvjrKblvnCo729xM5HpmpxTtSZWQIYWMSkDoeTp64zW4ZCGx-wBEsWle-s7WL80QRkh480AdpKE0o2jBPuevpF-760kMsuJ-4N1IH8rrEMYFL5AeJPo5-8aOLUG-2vjhLmbkTJGH25vXddxzwQtbOzGo51QSDfkZgssamXtwxauNeYl9OtaPjiePgDQ8Cj6YzC28XqNAjUTFSoQjlYlJ3IVUQEOGVJAjSrisI3W0qvl6OaOGRQwnVEABjUlnzwhS_gOdZOvU0JHXRiD146jeUEo="
 
 SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
-TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج (گۆڕدرا بۆ cciraq73)
+TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج
 # ===================================
 
 async def main():
