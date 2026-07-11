@@ -4,7 +4,7 @@ from telethon.sessions import StringSession
 # ========== ڕێکخستنەکان ==========
 api_id = 33774652
 api_hash = "c438941d8f43a0ff59fcc4b3f3c2fb42"
-session = "1ApWapzMBu55FFH32tbL7Qe15_IRzlscaRYhiHz_QGKffwE-uEKyG1tZ4-UiC5djhP8OnwIbPXlxPMM9oAM1ILtMK07BaLyOGkPjwtTU0oEaqsawX3w32enHteG1QjbFzBRoAV5rU-DiJmfqC305ZagiNOA8FAD4_LHMciBXldNTnA_y3mHlo9cpECRpZDrSa5QiSmxJcIKZDpy1luABObuVeiUr-hetJhk402ZmFJ2Iky-yqT_dBwaYberLfdQqTyQQoNWpIrwHt0bXsL6UqJCRgnjUGYb5iqMC5arNfofRvCKFGZwoFXWPHrOpYKnvTnnV1fi23tJ_UqJFIk5JLgZ03Nv3xJ3c="
+session = session = "1ApWapzMBu0hPg4YXGIf6GL6fgSZ0l9ZSVH48MQUpR7dJuFJSBm767Y71HZkek3MiY1Ib4Id3hZMxfMJdGWAbh0Rtbo3ZAPpMJ83NdinnPtRhckad5aU7hzKqBuAsQQZoJtITGEcBWHqFPtWViBeDjPWirMiGB05kUj6BHeKUGfqRLcYPbGMs-lxp9rjVswU67s0LrdDcp-qa0adD1T1Tc9Bhn44DujwzGtK3JW197hk0j1RTCzyRgrQV0nku4Y0-AWJLnZhnnjqNLXQAiWOphSUl2x6hyqQDOpKQXhJ6_xizfnlklUlAACGAqnsajTQ08zSP40mY61ZHisF5PCg8cjknPFXSQLY="
 # ===================================
 
 SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
