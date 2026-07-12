@@ -1,16 +1,15 @@
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 import asyncio
-import os
-import time  # زیادکرا بۆ چارەسەری کێشەکە
+import time
 
 # ========== ڕێکخستنەکان ==========
 API_ID = 33790522
 API_HASH = '00e4131295f55452e143c06099c1ddae'
 SESSION_STRING = "1ApWapzMBu6FHA0TJuXxK6WEt68lZLodw-AaNiJUDghsVoqZTQu2dvKcfh-tsXst9Dall4nPZSvjrKblvnCo729xM5HpmpxTtSZWQIYWMSkDoeTp64zW4ZCGx-wBEsWle-s7WL80QRkh480AdpKE0o2jBPuevpF-760kMsuJ-4N1IH8rrEMYFL5AeJPo5-8aOLUG-2vjhLmbkTJGH25vXddxzwQtbOzGo51QSDfkZgssamXtwxauNeYl9OtaPjiePgDQ8Cj6YzC28XqNAjUTFSoQjlYlJ3IVUQEOGVJAjSrisI3W0qvl6OaOGRQwnVEABjUlnzwhS_gOdZOvU0JHXRiD146jeUEo="
 
-SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
-TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج
+SOURCE_CHANNEL = "@xforcegroupBOT"   # چەناڵی سەرچاوە (ئەم بۆتە لێرەوە دەخوێنێت)
+TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج (پەیامەکان دەنێردرێت بۆ ئێرە)
 # ===================================
 
 async def main():
@@ -23,13 +22,19 @@ async def main():
     @client.on(events.NewMessage(chats=SOURCE_CHANNEL))
     async def handler(event):
         msg = event.message
-        text = msg.text or ""
+        sender = await msg.get_sender()
+        
+        # ========== پشکنینی ناوی بەکارهێنەر ==========
+        # ئەگەر نێردراو نەناسراو بوو یان ناوی بەکارهێنەرەکەی "CC_posterBOT" نەبوو، پەیامەکە ڕەت بکەرەوە
+        if not sender or sender.username != "CC_posterBOT":
+            return
+        # ==========================================
 
-        print(f"📩 New message received from: {msg.sender.username if msg.sender else 'Unknown'}")
+        text = msg.text or ""
+        print(f"📩 New message received from target BOT: {sender.username}")
 
         try:
             if msg.media:
-                # گۆڕانکاری: file=bytes لابرا بۆ ئەوەی بە شێوەیەکی ڕاست کار بکات
                 data = await msg.download_media()
                 await client.send_file(
                     TARGET_CHANNEL,
@@ -54,7 +59,7 @@ async def main():
         print(f"❌ Disconnected: {e}")
         await asyncio.sleep(5)
 
-# گۆڕانکاری لەم بەشەدا: await asyncio.sleep(10) گۆڕدرا بۆ time.sleep(10)
+# چارەسەری کێشەی پێشوو
 while True:
     try:
         asyncio.run(main())
