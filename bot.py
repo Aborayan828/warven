@@ -8,10 +8,11 @@ import re    # زیادکرا بۆ پشکنینی کارت
 # ========== ڕێکخستنەکان ==========
 API_ID = 33790522
 API_HASH = '00e4131295f55452e143c06099c1ddae'
-SESSION_STRING = "1ApWapzMBuzkxSBUapE5LFtVBuY3Mc8vp26LwBWezyJhnH3qg8jCp7Q4GfPZTmtBEw0S3Q_4ne_uOc67MiVypdXm7876HU8Z6XUZJzH1NfGEWkPID8pb6VU1n7WnimTFC55r1VpDbUD-lKXMZ0h0xLDOuHulO11QDXdHk02KAIWlOcwLzyrWdG6AR-jCmQzU3_T3_YDXhfoOFJu6Xi8Q7yTLV5dt1HdR4CMVCFS6rBkwUPo4vXxVYQG4wih1dTqkjLgyTxbkmIGpje6o2VnFokDJi0XQFbSsIe3vL55TAJK5JLn-vJasbSN-UYm18ji3DPK2uxLons4K92KHJpHc0qfASDzHdtvQ="
+# SESSION_STRING نوێکرایەوە بەوەی کە ناردووت
+SESSION_STRING = "1ApWapzMBu68hbuAHZP61sdj0nb2eUfBLYWF23TwHbaoysXXsRCYQ_KMnzE_CsevfxrNv3hdxO2yD32v83yPFHk1TpuSe-t30nNuWtikdmhOZ7dhjaR4M2RR8iagx3qFbX2fbkM4Tntr_HCZSS-aD_wmLaywS9W5qmoXyjodbD2vAISwzdkbIu1xobyzVsKd8rftZgaT4CHHxGtMf9vSGEKGic4s63c742HlriKghwy83Gt6gz8cqqqzIxMbQqyXH2xED7QQC8U2qS8cDEC1ndrVRsBhivQzsuPdEw-DUVpNwDyyy5_bdZ4a6IYF8V6P8o_9h-GNFybCg9mMfKUsdb4rImyCDa9Y="
 
 SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
-TARGET_CHANNEL = "@CVC428"           # گروپی ئامانج (گۆڕدرا بۆ ناوی تۆ)
+TARGET_CHANNEL = "@CVC428"           # گروپی ئامانج
 TARGET_ADMIN = "CC_posterBOT"        # تەنها پەیامەکانی ئەم ئەدمینە بگوازەرەوە
 # ===================================
 
