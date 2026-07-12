@@ -8,8 +8,8 @@ API_ID = 33790522
 API_HASH = '00e4131295f55452e143c06099c1ddae'
 SESSION_STRING = "1ApWapzMBu6FHA0TJuXxK6WEt68lZLodw-AaNiJUDghsVoqZTQu2dvKcfh-tsXst9Dall4nPZSvjrKblvnCo729xM5HpmpxTtSZWQIYWMSkDoeTp64zW4ZCGx-wBEsWle-s7WL80QRkh480AdpKE0o2jBPuevpF-760kMsuJ-4N1IH8rrEMYFL5AeJPo5-8aOLUG-2vjhLmbkTJGH25vXddxzwQtbOzGo51QSDfkZgssamXtwxauNeYl9OtaPjiePgDQ8Cj6YzC28XqNAjUTFSoQjlYlJ3IVUQEOGVJAjSrisI3W0qvl6OaOGRQwnVEABjUlnzwhS_gOdZOvU0JHXRiD146jeUEo="
 
-SOURCE_CHANNEL = "@xforcegroupBOT"   # چەناڵی سەرچاوە (ئەم بۆتە لێرەوە دەخوێنێت)
-TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج (پەیامەکان دەنێردرێت بۆ ئێرە)
+SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
+TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج
 # ===================================
 
 async def main():
@@ -24,14 +24,22 @@ async def main():
         msg = event.message
         sender = await msg.get_sender()
         
-        # ========== پشکنینی ناوی بەکارهێنەر ==========
-        # ئەگەر نێردراو نەناسراو بوو یان ناوی بەکارهێنەرەکەی "CC_posterBOT" نەبوو، پەیامەکە ڕەت بکەرەوە
-        if not sender or sender.username != "CC_posterBOT":
+        # ========== پشکنینی تایبەت بە بۆتەکە ==========
+        if not sender:
             return
-        # ==========================================
+
+        # وەرگرتنی ناوی بەکارهێنەر
+        username = sender.username.lower() if sender.username else ""
+        target_username = "cc_posterbot" # ناوی ڕاستەقینەی بۆتەکە
+
+        # ئەگەر ناوی بەکارهێنەرەکە نەگونجا، پەیامەکە ڕەت بکەرەوە (هیچ نانێرێت)
+        if username != target_username:
+            print(f"⚠️ Skipped message from: {sender.first_name} (username: @{username if username else 'None'})")
+            return
+        # ===========================================
 
         text = msg.text or ""
-        print(f"📩 New message received from target BOT: {sender.username}")
+        print(f"📩 New message received from TARGET BOT: @{sender.username}")
 
         try:
             if msg.media:
@@ -59,7 +67,7 @@ async def main():
         print(f"❌ Disconnected: {e}")
         await asyncio.sleep(5)
 
-# چارەسەری کێشەی پێشوو
+# دەستپێکردنەوە ئەگەر بڕوخێت
 while True:
     try:
         asyncio.run(main())
