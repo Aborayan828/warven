@@ -8,13 +8,15 @@ import re
 # ========== ڕێکخستنەکان ==========
 API_ID = 33790522
 API_HASH = '00e4131295f55452e143c06099c1ddae'
-# نیو سێشن سترینگ (گۆڕدرا بە دوایین دانە)
 SESSION_STRING = "1ApWapzMBu7bJu8xOt_YrlzMVwc_12_ivKqkIPeOF0xwdcPIDLdr8fpuHyPXDktcNedOluZWr9PDS0sPIHpS9drB568AH6wt5ADWDQfKPWTfp_4lrSeDkpZFYQ0V9m7S7Mce9ZEmm5iLOPOOJ_EeRRmx0PYhHFXmQSyNSFMUBjWVsH2ZkauEdXZ-Wl_0AbPQnd34HQzjh9OyahFN_aHa29TkO-9X2OzhoKYGLEu9tPa0TUDDobU1M-wxBjJGOpfPY4jhS9AWEiEzMSXHPVMVX7tUBPiaG6_8UXcaEaELpWcDMLzzDloCWC7Q9oXjr2gzFw_XzhpnxbPjaFYdboljUV3iXRpX-tQM="
 
-SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
-TARGET_CHANNEL = "@CVC428"           # گروپی ئامانج
-TARGET_ADMIN = "CC_posterBOT"        # تەنها پەیامەکانی ئەم ئەدمینە بگوازەرەوە
+SOURCE_CHANNEL = "@xforcegroupBOT"
+TARGET_CHANNEL = "@CVC428"
+TARGET_ADMIN = "CC_posterBOT"
 # ===================================
+
+# کۆمەڵەی ناسنامەی پەیامە نێردراوەکان (بۆ ڕێگەگرتن لە دووجاربوون)
+sent_message_ids = set()
 
 async def main():
     client = TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH)
@@ -29,6 +31,7 @@ async def main():
         msg = event.message
         text = msg.text or ""
 
+        # پشتگوێخستنی ئەگەر بێ نێرەر یان ئەدمینی دیاریکراو نەبێت
         if not msg.sender:
             return
         sender_username = msg.sender.username
@@ -36,12 +39,19 @@ async def main():
             print(f"⏳ Ignored: message from @{sender_username} (not {TARGET_ADMIN})")
             return
 
-        # پشکنینی کارت (١٥ یان ١٦ ژمارە)
+        # پشکنینی بوونی کارت (١٥ یان ١٦ ژمارە)
         if not re.search(r'\d{15,16}', text):
             print(f"⏳ Ignored: This message does NOT contain a Card.")
             return
 
-        print(f"💳 Card detected from: @{sender_username}")
+        # **ڕێگری لە دووجاربوون**
+        msg_id = msg.id
+        if msg_id in sent_message_ids:
+            print(f"⏳ Duplicate message {msg_id} ignored.")
+            return
+        sent_message_ids.add(msg_id)
+
+        print(f"💳 Card detected from: @{sender_username} (ID: {msg_id})")
 
         try:
             if msg.media:
