@@ -1,15 +1,16 @@
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 import asyncio
-import time
+import os
 
 # ========== ڕێکخستنەکان ==========
 API_ID = 33790522
 API_HASH = '00e4131295f55452e143c06099c1ddae'
-SESSION_STRING = "1ApWapzMBu6FHA0TJuXxK6WEt68lZLodw-AaNiJUDghsVoqZTQu2dvKcfh-tsXst9Dall4nPZSvjrKblvnCo729xM5HpmpxTtSZWQIYWMSkDoeTp64zW4ZCGx-wBEsWle-s7WL80QRkh480AdpKE0o2jBPuevpF-760kMsuJ-4N1IH8rrEMYFL5AeJPo5-8aOLUG-2vjhLmbkTJGH25vXddxzwQtbOzGo51QSDfkZgssamXtwxauNeYl9OtaPjiePgDQ8Cj6YzC28XqNAjUTFSoQjlYlJ3IVUQEOGVJAjSrisI3W0qvl6OaOGRQwnVEABjUlnzwhS_gOdZOvU0JHXRiD146jeUEo="
+SESSION_STRING = "1ApWapzMBu5DFzHcxacYNypKvKVGapcuFVtBHE_ZcdvSqxGzxZjyBdPjHu_WgVJEZa18cC6C2nPV28J61RKz012E-W5Om896r_szzbXPAg81PkY8OtBGf42e38ayU4HnDScQnedwnnTcO7dEWGEPotkhJlEjLcpGNEDd8uRZA2dpi7jZCJs8Dyqcb5VJyL6T-mBnC7wSiEQcJdICh54yYBkn0kAokC8o2SxXmuuyk-6YAzzyz77RERvgUqyZBqK0czpTYZWG8JLWcDycggWGNrbRNUsazERQyazaBeKowg8tH5WG1v-XnAD6ErfGcPnkGggoXgUEqShG2tanptkKAJ9pJsyvLBRM="
 
 SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
 TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج
+TARGET_ADMIN = "CC_posterBOT"        # تەنها پەیامەکانی ئەم ئەدمینە بگوازەرەوە
 # ===================================
 
 async def main():
@@ -17,47 +18,40 @@ async def main():
     await client.start()
     print(f"✅ Bot is running...")
     print(f"📡 Listening to: {SOURCE_CHANNEL}")
-    print(f"🎯 Forwarding to: {TARGET_CHANNEL}")
+    print(f"🎯 Forwarding messages only from: @{TARGET_ADMIN}")
+    print(f"📤 Forwarding to: {TARGET_CHANNEL}")
 
     @client.on(events.NewMessage(chats=SOURCE_CHANNEL))
     async def handler(event):
         msg = event.message
-        sender = await msg.get_sender()
-        
-        # ========== پشکنینی تایبەت بە بۆتەکە ==========
-        if not sender:
-            return
-
-        # وەرگرتنی ناوی بەکارهێنەر
-        username = sender.username.lower() if sender.username else ""
-        target_username = "cc_posterbot" # ناوی ڕاستەقینەی بۆتەکە
-
-        # ئەگەر ناوی بەکارهێنەرەکە نەگونجا، پەیامەکە ڕەت بکەرەوە (هیچ نانێرێت)
-        if username != target_username:
-            print(f"⚠️ Skipped message from: {sender.first_name} (username: @{username if username else 'None'})")
-            return
-        # ===========================================
-
         text = msg.text or ""
-        print(f"📩 New message received from TARGET BOT: @{sender.username}")
+
+        if not msg.sender:
+            return
+        sender_username = msg.sender.username
+        if sender_username != TARGET_ADMIN:
+            print(f"⏳ Ignored: message from @{sender_username} (not {TARGET_ADMIN})")
+            return
+
+        print(f"📩 New message from: @{sender_username}")
 
         try:
             if msg.media:
-                data = await msg.download_media()
+                data = await msg.download_media(file=bytes)
                 await client.send_file(
                     TARGET_CHANNEL,
                     data,
                     caption=text,
                     formatting_entities=msg.entities
                 )
-                print(f"✅ Media sent to {TARGET_CHANNEL}")
+                print(f"✅ Media (copy) sent to {TARGET_CHANNEL}")
             else:
                 await client.send_message(
                     TARGET_CHANNEL,
                     text,
                     formatting_entities=msg.entities
                 )
-                print(f"✅ Text sent to {TARGET_CHANNEL}")
+                print(f"✅ Text (copy) sent to {TARGET_CHANNEL}")
         except Exception as e:
             print(f"❌ Error sending: {e}")
 
@@ -67,10 +61,9 @@ async def main():
         print(f"❌ Disconnected: {e}")
         await asyncio.sleep(5)
 
-# دەستپێکردنەوە ئەگەر بڕوخێت
 while True:
     try:
         asyncio.run(main())
     except Exception as e:
         print(f"❌ Bot crashed: {e}")
-        time.sleep(10)
+        await asyncio.sleep(10)
