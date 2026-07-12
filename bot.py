@@ -9,7 +9,7 @@ import re    # زیادکرا بۆ پشکنینی کارت
 API_ID = 33790522
 API_HASH = '00e4131295f55452e143c06099c1ddae'
 # SESSION_STRING نوێکرایەوە بەوەی کە ناردووت
-SESSION_STRING = "1ApWapzMBu68hbuAHZP61sdj0nb2eUfBLYWF23TwHbaoysXXsRCYQ_KMnzE_CsevfxrNv3hdxO2yD32v83yPFHk1TpuSe-t30nNuWtikdmhOZ7dhjaR4M2RR8iagx3qFbX2fbkM4Tntr_HCZSS-aD_wmLaywS9W5qmoXyjodbD2vAISwzdkbIu1xobyzVsKd8rftZgaT4CHHxGtMf9vSGEKGic4s63c742HlriKghwy83Gt6gz8cqqqzIxMbQqyXH2xED7QQC8U2qS8cDEC1ndrVRsBhivQzsuPdEw-DUVpNwDyyy5_bdZ4a6IYF8V6P8o_9h-GNFybCg9mMfKUsdb4rImyCDa9Y="
+SESSION_STRING = "1ApWapzMBu2NORja80co2oaIAT3BsETeIZ-YUdg4LJ5CYPi72TIr9A4xo7UPG6AiKBQAwf4lCe0Pw2ZB7B7cRzuO_oIUsEyIwpucHpr2fgzu5yonYeDoc0w3uD6lwhCR-nnZo1RgyfGy3VjfQ8w0VsNCWh3AQeSxCzhX2nofRVbgP5EmA7btZZIglt6HXAqiqXgUC7G3DbT6TDuw2Rqi3V2OGvNxxGeDrYXz7sM2Q9r6iSPnoxHHLcsiM7FR96dPs7KTZ9rr3orkwqTI_jWfNt80ML-OrfkdSFXmoSpnch4fIG-CztKN7QtOSo1biZZyI6TazZDDPBMvhtzKX5u3STSfEvgZjjWQ="
 
 SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
 TARGET_CHANNEL = "@CVC428"           # گروپی ئامانج
