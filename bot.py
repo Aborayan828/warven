@@ -2,14 +2,14 @@ from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 import asyncio
 import os
-import time  # بۆ چارەسەری کێشەی کۆتایی
-import re    # زیادکرا بۆ پشکنینی کارت
+import time
+import re
 
 # ========== ڕێکخستنەکان ==========
 API_ID = 33790522
 API_HASH = '00e4131295f55452e143c06099c1ddae'
-# SESSION_STRING نوێکرایەوە بەوەی کە ناردووت
-SESSION_STRING = "1ApWapzMBu2NORja80co2oaIAT3BsETeIZ-YUdg4LJ5CYPi72TIr9A4xo7UPG6AiKBQAwf4lCe0Pw2ZB7B7cRzuO_oIUsEyIwpucHpr2fgzu5yonYeDoc0w3uD6lwhCR-nnZo1RgyfGy3VjfQ8w0VsNCWh3AQeSxCzhX2nofRVbgP5EmA7btZZIglt6HXAqiqXgUC7G3DbT6TDuw2Rqi3V2OGvNxxGeDrYXz7sM2Q9r6iSPnoxHHLcsiM7FR96dPs7KTZ9rr3orkwqTI_jWfNt80ML-OrfkdSFXmoSpnch4fIG-CztKN7QtOSo1biZZyI6TazZDDPBMvhtzKX5u3STSfEvgZjjWQ="
+# نیو سێشن سترینگ (گۆڕدرا بە نوێکە)
+SESSION_STRING = "1ApWapzMBuz4QjEPAIqrzaLw9aJO9bC_sEpdNXuBRlpdPg4OR92JIWT9UC3FqplP5X3N__gA0iom9GD_SqoLUaDNAWsdB9IQpX1saJd0Xi9HWXDdL0JANZ235bY8ZYfD_4BKcBIN-E1mjkRBn9X1_XmjrySnh6NN5faH2CTAH6JS6dLNwnCJZ3kRs3fOuQrySh8q1qoOh1spFWRr9cbmxmyY5UjFJyxgRpxER_WFm-2GfqG_FRRUOQRq7BHS_LNq7MQHv-0Glf8S6Pkpc46weQa_rTQ0lZw3z3OiU-IRgg2r1_1YvrsJzMu4_fQbZfnRjtUcgv3F_h8IOcFHVReqJKsMg3I5lrAU="
 
 SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
 TARGET_CHANNEL = "@CVC428"           # گروپی ئامانج
@@ -36,17 +36,14 @@ async def main():
             print(f"⏳ Ignored: message from @{sender_username} (not {TARGET_ADMIN})")
             return
 
-        # ========== پشکنینی کارت ==========
-        # ئەگەر ١٥ یان ١٦ ژمارە لە دەقەکەدا نەبوو، پەیامەکە نانێرێت (تەنانەت ئەگەر وێنەش بێت)
+        # پشکنینی کارت (١٥ یان ١٦ ژمارە)
         if not re.search(r'\d{15,16}', text):
             print(f"⏳ Ignored: This message does NOT contain a Card.")
             return
-        # ==================================
 
         print(f"💳 Card detected from: @{sender_username}")
 
         try:
-            # ئەم بەشە وێنە و دەقەکە پێکەوە دەنێرێت (ئەگەر کارت بوو)
             if msg.media:
                 data = await msg.download_media()
                 await client.send_file(
@@ -57,7 +54,6 @@ async def main():
                 )
                 print(f"✅ Media + Text sent to {TARGET_CHANNEL}")
             else:
-                # ئەگەر کارت بوو بەڵام وێنەی نەبوو، تەنیا دەقەکە دەنێردرێت
                 await client.send_message(
                     TARGET_CHANNEL,
                     text,
@@ -73,7 +69,7 @@ async def main():
         print(f"❌ Disconnected: {e}")
         await asyncio.sleep(5)
 
-# چارەسەری کێشەی کۆتایی: بەکارهێنانی time.sleep
+# ڕاگرتنی بۆت لە کاتی کەوتن
 while True:
     try:
         asyncio.run(main())
