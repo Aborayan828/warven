@@ -2,15 +2,14 @@ from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 import asyncio
 import os
-import time
 
 # ========== ڕێکخستنەکان ==========
 API_ID = 33790522
 API_HASH = '00e4131295f55452e143c06099c1ddae'
-SESSION_STRING = "1ApWapzMBu5DFzHcxacYNypKvKVGapcuFVtBHE_ZcdvSqxGzxZjyBdPjHu_WgVJEZa18cC6C2nPV28J61RKz012E-W5Om896r_szzbXPAg81PkY8OtBGf42e38ayU4HnDScQnedwnnTcO7dEWGEPotkhJlEjLcpGNEDd8uRZA2dpi7jZCJs8Dyqcb5VJyL6T-mBnC7wSiEQcJdICh54yYBkn0kAokC8o2SxXmuuyk-6YAzzyz77RERvgUqyZBqK0czpTYZWG8JLWcDycggWGNrbRNUsazERQyazaBeKowg8tH5WG1v-XnAD6ErfGcPnkGggoXgUEqShG2tanptkKAJ9pJsyvLBRM="
+SESSION_STRING = "1ApWapzMBuzkxSBUapE5LFtVBuY3Mc8vp26LwBWezyJhnH3qg8jCp7Q4GfPZTmtBEw0S3Q_4ne_uOc67MiVypdXm7876HU8Z6XUZJzH1NfGEWkPID8pb6VU1n7WnimTFC55r1VpDbUD-lKXMZ0h0xLDOuHulO11QDXdHk02KAIWlOcwLzyrWdG6AR-jCmQzU3_T3_YDXhfoOFJu6Xi8Q7yTLV5dt1HdR4CMVCFS6rBkwUPo4vXxVYQG4wih1dTqkjLgyTxbkmIGpje6o2VnFokDJi0XQFbSsIe3vL55TAJK5JLn-vJasbSN-UYm18ji3DPK2uxLons4K92KHJpHc0qfASDzHdtvQ="
 
 SOURCE_CHANNEL = "@xforcegroupBOT"   # گروپی سەرچاوە
-TARGET_CHANNEL = "@CVC428"           # گروپی ئامانج (گۆڕدرا بۆ ناوی تۆ)
+TARGET_CHANNEL = "@cciraq73"         # گروپی ئامانج
 TARGET_ADMIN = "CC_posterBOT"        # تەنها پەیامەکانی ئەم ئەدمینە بگوازەرەوە
 # ===================================
 
@@ -38,7 +37,7 @@ async def main():
 
         try:
             if msg.media:
-                data = await msg.download_media()
+                data = await msg.download_media(file=bytes)
                 await client.send_file(
                     TARGET_CHANNEL,
                     data,
@@ -62,10 +61,9 @@ async def main():
         print(f"❌ Disconnected: {e}")
         await asyncio.sleep(5)
 
-# گۆڕانکاری لە کۆتاییدا: 'await asyncio.sleep' گۆڕدرا بۆ 'time.sleep'
 while True:
     try:
         asyncio.run(main())
     except Exception as e:
         print(f"❌ Bot crashed: {e}")
-        time.sleep(10)
+        await asyncio.sleep(10)
