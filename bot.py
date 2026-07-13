@@ -4,11 +4,14 @@ import asyncio
 
 API_ID = 33790522
 API_HASH = "00e4131295f55452e143c06099c1ddae"
-SOURCE = "cciraq73"
-TARGET = "xforcegroupBOT"
+
+# ========= چەناڵەکان =========
+SOURCE = "xforcegroupBOT"  # چەناڵی سەرچاوە (پەیامەکانی لێ دەخوێنرێتەوە)
+TARGET = "cciraq73"        # چەناڵی ئامانج (پەیامەکانی بۆ دەنێردرێت)
+# =============================
 
 # ===== Sessionە نوێیەکەی تۆ =====
-MY_SESSION = "1ApWapzMBu8BWQ3YoC2sKxY4xt3IC4J6CZNejM4OUdDmNTzPyrYsGXOfNmoYmF0-PBYeVVVzXAvHopql-lOR3P-6zQrBu1WVM7Vr-s44_-hSUCmbWqucTVsMHVEVATIJQEjLTBpyD7aT0K7dJWDkCHMWju-7tif8wyVk8pb1CtPkGFQKWd0CRo1ojdBSfiMAbDuQeBBtKWpKyzekGPqjmk8xMV1R4pztJEQ69p4uT8e5GfWKn3trKC5iSttOy7ajWYVNNCKQ3N3GEwIctUPUhFvkcwFlLWDZuNA6FJFFW433UxsK5i_NoBHzrQBFgDynxXU7vKPSDWRFUIg0AQfEs9ttKj5OAVnA=".strip()
+MY_SESSION = "1ApWapzMBu6QGF4svhlJDFY_AemJyFVFfRoFIQUu-EeHJx9pU_9FbzBiN59WmouNp3g0EsKaweex9bB7KOgPIbV6axG3BlQwjWL7U62VmIyby2BRp1zFbu9h8wUj7M4czuGJbycmNsvxsML9miCjCKa5piO3cfDpvUwxqmFjKbF_L8VTYA5872fW_ZT8JmyTvg4g6s2OqanfbL0kY14_i7cdyv2_zEtVOL3WTFbU1dE1IdKr1Gxy7piHDu6-CgqMz6whU0XBh1pF6tLNfH9Orl5z3bcXhCRCUQPloHO0ZNq9Iu4Kp0MfTFSJe9OPh3ESF4h8ntbz-NizdkxSbaAU00OZ8S550xFA=".strip()
 
 client = TelegramClient(StringSession(MY_SESSION), API_ID, API_HASH)
 
@@ -37,7 +40,7 @@ async def main():
             sender = await event.get_sender()
             if sender and hasattr(sender, 'username') and sender.username == "CaptainCC_bot":
                 if await copy_message(TARGET, event.message):
-                    print("✅ پەیامێکی نوێ لە لایەن CaptainCC_bot کۆپی کرا و نێردرا!")
+                    print(f"✅ پەیامێکی نوێ لە لایەن CaptainCC_bot کۆپی کرا و نێردرا بۆ {TARGET}!")
             else:
                 pass
 
