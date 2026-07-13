@@ -1,88 +1,40 @@
 from telethon import TelegramClient, events
-from telethon.sessions import StringSession
 import asyncio
-import os
-import time
-import re
 
-# ========== ڕێکخستنەکان ==========
+# ============ زانیارییەکانی تۆ ============
 API_ID = 33790522
-API_HASH = '00e4131295f55452e143c06099c1ddae'
-SESSION_STRING = "1ApWapzMBu3qEsMI8RAZAKdm1od8rJhSMxsqYEBUEEdsQ83GiOtt5Ca-eJxwetya-i2dknbc0xt0mEyOHoM6Oe_n2Ic-0amO3SnrbGeDqyBuT1kZINDVAlx7-rdUkYCNOKvUvOAu8Gy57XvjwUS7py-UEbEyp63h2NNH9myJAjCP9B9ohWJdwPvQGWbwVQws-6e8ChH16hJRBr4BLGcblZgCtTUuMLOmEvGfcCLBdSJwKBbmzt7sNVhW9uIhDG0HeYsraiOhE37p1xFUIZD87Hd4RH9_90BZss8TBKsbLxecP6TRhTXbv7qGzy660945u3D7K8Xt1WdjKSoMchyJF1nc_5UXi-DY="
+API_HASH = "00e4131295f55452e143c06099c1ddae"
 
-SOURCE_CHANNEL = "@xforcegroupBOT"
-TARGET_CHANNEL = "@CVC428"
-TARGET_ADMIN = "CC_posterBOT"
-# ===================================
+# ============ ناوی گروپ و چەناڵ ============
+SOURCE = "CCsPoster"          # ناوی گروپی سەرچاوە
+TARGET = "@CVC428"            # ناوی چەناڵەکەی خۆت (بە @)
 
-# کۆمەڵەی ناسنامەی پەیامە نێردراوەکان (بۆ ڕێگەگرتن لە دووجاربوون)
-sent_message_ids = set()
+client = TelegramClient('my_session', API_ID, API_HASH)
+
+async def copy_message(target, msg):
+    """پەیامێک کۆپی دەکات و وەک پەیامی نوێ دەینێرێت (نەک فۆروارد)"""
+    try:
+        if msg.text and not msg.media:
+            await client.send_message(target, msg.text)
+        elif msg.media:
+            await client.send_file(target, msg.media, caption=msg.text or "")
+        else:
+            return False
+        return True
+    except Exception as e:
+        print(f"❌ هەڵە لە کۆپیکردن: {e}")
+        return False
 
 async def main():
-    client = TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH)
     await client.start()
-    print(f"✅ Bot is running...")
-    print(f"📡 Listening to: {SOURCE_CHANNEL}")
-    print(f"🎯 Only forwarding CARDS from: @{TARGET_ADMIN}")
-    print(f"📤 Forwarding to: {TARGET_CHANNEL}")
+    print("✅ پەیوەندی بە تێلگرامەوە کرا!")
+    print("🔄 چاوەڕوانی پەیامە نوێکانی گروپی CCsPoster دەکات... (هیچ پەیامێکی کۆن کۆپی ناکرێت)")
 
-    @client.on(events.NewMessage(chats=SOURCE_CHANNEL))
-    async def handler(event):
-        msg = event.message
-        text = msg.text or ""
+    @client.on(events.NewMessage(chats=SOURCE))
+    async def copy_new(event):
+        if await copy_message(TARGET, event.message):
+            print("✅ پەیامێکی نوێ کۆپی کرا و نێردرا بۆ چەناڵەکەت!")
 
-        # پشتگوێخستنی ئەگەر بێ نێرەر یان ئەدمینی دیاریکراو نەبێت
-        if not msg.sender:
-            return
-        sender_username = msg.sender.username
-        if sender_username != TARGET_ADMIN:
-            print(f"⏳ Ignored: message from @{sender_username} (not {TARGET_ADMIN})")
-            return
+    await client.run_until_disconnected()
 
-        # پشکنینی بوونی کارت (١٥ یان ١٦ ژمارە)
-        if not re.search(r'\d{15,16}', text):
-            print(f"⏳ Ignored: This message does NOT contain a Card.")
-            return
-
-        # **ڕێگری لە دووجاربوون**
-        msg_id = msg.id
-        if msg_id in sent_message_ids:
-            print(f"⏳ Duplicate message {msg_id} ignored.")
-            return
-        sent_message_ids.add(msg_id)
-
-        print(f"💳 Card detected from: @{sender_username} (ID: {msg_id})")
-
-        try:
-            if msg.media:
-                data = await msg.download_media()
-                await client.send_file(
-                    TARGET_CHANNEL,
-                    data,
-                    caption=text,
-                    formatting_entities=msg.entities
-                )
-                print(f"✅ Media + Text sent to {TARGET_CHANNEL}")
-            else:
-                await client.send_message(
-                    TARGET_CHANNEL,
-                    text,
-                    formatting_entities=msg.entities
-                )
-                print(f"✅ Text sent to {TARGET_CHANNEL}")
-        except Exception as e:
-            print(f"❌ Error sending: {e}")
-
-    try:
-        await client.run_until_disconnected()
-    except Exception as e:
-        print(f"❌ Disconnected: {e}")
-        await asyncio.sleep(5)
-
-# ڕاگرتنی بۆت لە کاتی کەوتن
-while True:
-    try:
-        asyncio.run(main())
-    except Exception as e:
-        print(f"❌ Bot crashed: {e}")
-        time.sleep(10)
+asyncio.run(main())
