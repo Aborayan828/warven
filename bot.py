@@ -7,8 +7,7 @@ API_HASH = "00e4131295f55452e143c06099c1ddae"
 SOURCE = "cciraq73"
 TARGET = "xforcegroupBOT"
 
-# ===== Sessionە نوێیەکەی تۆ ===== 
-# .strip() زیاد کردووە بۆ ئەوەی ئەگەر بۆشایی یان خاڵی نوێ لەگەڵدا کۆپی بوو، پاکی بکاتەوە
+# ===== Sessionەکەی تۆ =====
 MY_SESSION = "1ApWapzMBu13SPdFAyIdjFpONStk3c8wBexVdMYzRA8Bw9CWy5qZdRN-FV4rMBSxRMUd2hgIAZ7fszb9D7wMNiOgTXKz5Flw8aGzvGnHKgrbiq9FmMN16bm3OE-LWBjFs62dnZaGptSE6ymMrT-SI3nuixPU6D6TZhFPl-1bVvKUkyINZqrvnwCy_r2dOWRiI7fMBjL3-Zh914VllV5kNRII7QwLh7Dw4bPnNjuodwXKbG0SRuK754f2PsKmS3jCPClD0vMgd9kMTlkjhH9DOccTCqt3Ym0poSDFq2L_D19pzKoMyY6PpEhhbD9kI77rD-IgpFe42596jK39ByOvDgxVOIDwKC8E=".strip()
 
 client = TelegramClient(StringSession(MY_SESSION), API_ID, API_HASH)
@@ -31,14 +30,19 @@ async def main():
         await client.start()
         print("✅ پەیوەندی بە تێلگرامەوە کرا!")
         print(f"🔄 چاوەڕوانی پەیامە نوێکانی گروپی {SOURCE} دەکات...")
-        print("⚠️ تەنها پەیامەکانی ئەدمین CC_posterBOT دەنێردرێت!")
+        print("⚠️ تەنها پەیامەکانی ئەدمین CaptainCC_bot دەنێردرێت!")
 
         @client.on(events.NewMessage(chats=SOURCE))
         async def copy_new(event):
             sender = await event.get_sender()
-            if sender and hasattr(sender, 'username') and sender.username == "CC_posterBOT":
+            
+            # گۆڕانکارییەکە لێرەیە: ناوی ئەدمین کراوە بە CaptainCC_bot
+            if sender and hasattr(sender, 'username') and sender.username == "CaptainCC_bot":
                 if await copy_message(TARGET, event.message):
-                    print("✅ پەیامێکی نوێ لە لایەن CC_posterBOT کۆپی کرا و نێردرا!")
+                    print("✅ پەیامێکی نوێ لە لایەن CaptainCC_bot کۆپی کرا و نێردرا!")
+            else:
+                # ئەگەر ئەدمینی تر یان کەسێکی تر بێت، هیچ نانێردرێت
+                pass
 
         await client.run_until_disconnected()
 
