@@ -7,8 +7,9 @@ API_HASH = "00e4131295f55452e143c06099c1ddae"
 SOURCE = "cciraq73"
 TARGET = "xforcegroupBOT"
 
-# دەقەکە دەخەینە ناو .strip() بۆ ئەوەی بۆشاییە زائیدەکان بنەبڕێت
-MY_SESSION = "1ApWapzMBu7BaTWOFn9S0rvZIPvBmrs5rvknjLQNql8HIes-hnv6-eS98-LySykCXVBCtF6xVMBPY3FRnNWscQZ8dBs7s5NziCqdmhX-YbxzBR2Ja_fEyXn-AOaJRap9L3qXlVSJjN5-nMW4WIWzsFGm-HOxedvGPLUfRGSbR14WEfKI_DD0icd-gblfPflUVYAWCdvDBl1i9fqgt_gS4jEG6xSJtQvMCPO-mVjCaS__mrGEXTFymsEmNNwuYKhQD6wBG2oUBAP8VUFR2I9s_WIJU6fN9_DVutQX0ZScXxf5xW3Q64g0cLyi2xl7lW0rYDzpz06jkzXI0jyLUX5QNA0MCL12oMTM=".strip()
+# ===== Sessionە نوێیەکەی تۆ ===== 
+# .strip() زیاد کردووە بۆ ئەوەی ئەگەر بۆشایی یان خاڵی نوێ لەگەڵدا کۆپی بوو، پاکی بکاتەوە
+MY_SESSION = "1ApWapzMBu13SPdFAyIdjFpONStk3c8wBexVdMYzRA8Bw9CWy5qZdRN-FV4rMBSxRMUd2hgIAZ7fszb9D7wMNiOgTXKz5Flw8aGzvGnHKgrbiq9FmMN16bm3OE-LWBjFs62dnZaGptSE6ymMrT-SI3nuixPU6D6TZhFPl-1bVvKUkyINZqrvnwCy_r2dOWRiI7fMBjL3-Zh914VllV5kNRII7QwLh7Dw4bPnNjuodwXKbG0SRuK754f2PsKmS3jCPClD0vMgd9kMTlkjhH9DOccTCqt3Ym0poSDFq2L_D19pzKoMyY6PpEhhbD9kI77rD-IgpFe42596jK39ByOvDgxVOIDwKC8E=".strip()
 
 client = TelegramClient(StringSession(MY_SESSION), API_ID, API_HASH)
 
@@ -27,24 +28,23 @@ async def copy_message(target, msg):
 
 async def main():
     try:
-        # پشکنینی پەیوەندی
         await client.start()
         print("✅ پەیوەندی بە تێلگرامەوە کرا!")
         print(f"🔄 چاوەڕوانی پەیامە نوێکانی گروپی {SOURCE} دەکات...")
+        print("⚠️ تەنها پەیامەکانی ئەدمین CC_posterBOT دەنێردرێت!")
 
         @client.on(events.NewMessage(chats=SOURCE))
         async def copy_new(event):
             sender = await event.get_sender()
             if sender and hasattr(sender, 'username') and sender.username == "CC_posterBOT":
                 if await copy_message(TARGET, event.message):
-                    print("✅ پەیامێکی نوێ کۆپی کرا!")
+                    print("✅ پەیامێکی نوێ لە لایەن CC_posterBOT کۆپی کرا و نێردرا!")
 
         await client.run_until_disconnected()
 
     except Exception as e:
-        # ئەم بەشە زۆر گرنگە! هەڵەکە دەنووسێت بۆ ئەوەی ببینیت
         print("=" * 40)
-        print("🚨 هەڵەیەک ڕوویدا لە کاتی پەیوەندیکردندا! تکایە ئەم هەڵەیە ببینە:")
+        print(f"🚨 هەڵەیەک ڕوویدا! ئەم هەڵەیە ببینە:")
         print(f"❌ هەڵەکە: {e}")
         print("=" * 40)
 
