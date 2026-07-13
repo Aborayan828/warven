@@ -7,11 +7,11 @@ API_HASH = "00e4131295f55452e143c06099c1ddae"
 
 # ========= چەناڵەکان =========
 SOURCE = "xforcegroupBOT"  # چەناڵی سەرچاوە (پەیامەکانی لێ دەخوێنرێتەوە)
-TARGET = "cciraq73"        # چەناڵی ئامانج (پەیامەکانی بۆ دەنێردرێت)
+TARGET = "CVC428"          # گۆڕانکاری: چەناڵی ئامانج (پەیامەکانی بۆ دەنێردرێت)
 # =============================
 
 # ===== Sessionە نوێیەکەی تۆ =====
-MY_SESSION = "1ApWapzMBu6QGF4svhlJDFY_AemJyFVFfRoFIQUu-EeHJx9pU_9FbzBiN59WmouNp3g0EsKaweex9bB7KOgPIbV6axG3BlQwjWL7U62VmIyby2BRp1zFbu9h8wUj7M4czuGJbycmNsvxsML9miCjCKa5piO3cfDpvUwxqmFjKbF_L8VTYA5872fW_ZT8JmyTvg4g6s2OqanfbL0kY14_i7cdyv2_zEtVOL3WTFbU1dE1IdKr1Gxy7piHDu6-CgqMz6whU0XBh1pF6tLNfH9Orl5z3bcXhCRCUQPloHO0ZNq9Iu4Kp0MfTFSJe9OPh3ESF4h8ntbz-NizdkxSbaAU00OZ8S550xFA=".strip()
+MY_SESSION = "1ApWapzMBu0wO0rFB4DywcEP_xLNQKmo5h6COQHaZys1Vf7Ve0Vn8YFQD3T8HKsiw_6Q0-zEZ-SPqgXwJrT_VQQytn8BDe6i09MuCjJnv2s1V0LSfMg0OWZTEfZ4vzbJ__xUmLJXr0IRfqtYLRR-LO6gpMJfRg0_eiCGrReea6RA1cFZjqtDtVoT10klMyib3VVv2NNRuBG9-CxbmMVRKRGX0DR02O4ROdQl6CZIdzwo7BYOzMZAOG1pla7gzzZsQpl_8OzNZy8aTiG0--X3aDY-OQmi7jGvZGNsZA30TSAYBeQhpl-qjbLTmOSxZZ8N3vJ8ctCu6maJK_AT_Luv6M8FOi5N45nI=".strip()
 
 client = TelegramClient(StringSession(MY_SESSION), API_ID, API_HASH)
 
@@ -33,14 +33,14 @@ async def main():
         await client.start()
         print("✅ پەیوەندی بە تێلگرامەوە کرا!")
         print(f"🔄 چاوەڕوانی پەیامە نوێکانی گروپی {SOURCE} دەکات...")
-        print("⚠️ تەنها پەیامەکانی ئەدمین CaptainCC_bot دەنێردرێت!")
+        print("⚠️ تەنها پەیامەکانی ئەدمین CC_posterBOT دەنێردرێت!")
 
         @client.on(events.NewMessage(chats=SOURCE))
         async def copy_new(event):
             sender = await event.get_sender()
-            if sender and hasattr(sender, 'username') and sender.username == "CaptainCC_bot":
+            if sender and hasattr(sender, 'username') and sender.username == "CC_posterBOT":
                 if await copy_message(TARGET, event.message):
-                    print(f"✅ پەیامێکی نوێ لە لایەن CaptainCC_bot کۆپی کرا و نێردرا بۆ {TARGET}!")
+                    print(f"✅ پەیامێکی نوێ لە لایەن CC_posterBOT کۆپی کرا و نێردرا بۆ {TARGET}!")
             else:
                 pass
 
