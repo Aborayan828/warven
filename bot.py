@@ -1,18 +1,16 @@
 from telethon import TelegramClient, events
+from telethon.sessions import StringSession
 import asyncio
+import os
 
-# ============ زانیارییەکانی تۆ ============
 API_ID = 33790522
 API_HASH = "00e4131295f55452e143c06099c1ddae"
+SOURCE = "cciraq73"          # گۆڕدرا بۆ cciraq73
+TARGET = "xforcegroupBOT"    # گۆڕدرا بۆ xforcegroupBOT (بەبێ @)
 
-# ============ ناوی گروپ و چەناڵ ============
-SOURCE = "CCsPoster"          # ناوی گروپی سەرچاوە
-TARGET = "@CVC428"            # ناوی چەناڵەکەی خۆت (بە @)
-
-client = TelegramClient('my_session', API_ID, API_HASH)
+client = TelegramClient(StringSession(os.getenv('SESSION_STRING')), API_ID, API_HASH)
 
 async def copy_message(target, msg):
-    """پەیامێک کۆپی دەکات و وەک پەیامی نوێ دەینێرێت (نەک فۆروارد)"""
     try:
         if msg.text and not msg.media:
             await client.send_message(target, msg.text)
@@ -28,12 +26,12 @@ async def copy_message(target, msg):
 async def main():
     await client.start()
     print("✅ پەیوەندی بە تێلگرامەوە کرا!")
-    print("🔄 چاوەڕوانی پەیامە نوێکانی گروپی CCsPoster دەکات... (هیچ پەیامێکی کۆن کۆپی ناکرێت)")
+    print(f"🔄 چاوەڕوانی پەیامە نوێکانی گروپی {SOURCE} دەکات...")
 
     @client.on(events.NewMessage(chats=SOURCE))
     async def copy_new(event):
         if await copy_message(TARGET, event.message):
-            print("✅ پەیامێکی نوێ کۆپی کرا و نێردرا بۆ چەناڵەکەت!")
+            print(f"✅ پەیامێکی نوێ کۆپی کرا و نێردرا بۆ {TARGET}!")
 
     await client.run_until_disconnected()
 
