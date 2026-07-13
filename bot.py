@@ -8,7 +8,8 @@ API_HASH = "00e4131295f55452e143c06099c1ddae"
 SOURCE = "xforcegroupBOT"
 TARGET = "CVC428"
 
-MY_SESSION = 
+# ===== Sessionە نوێیەکەی تۆ =====
+MY_SESSION = "1ApWapzMBuw9yZLl7ZEUeRCChYQAYtu7_lCMuVCwjXv73MwL_dDuBLy-rvjc_I4SB1OLVwtk2SFfo_L8sGn7Zqbm9myrBNYdfFKRe3qTxiJqj1AJIMLWYmbdGa5EWNWwQZY3OrDRHWl0_4QmGFUrn3Hk6FW6g4kl5x7Vpw0gVErBd16z5JJ72v0Cuk9B6WlnhgSMAlRTrhPv67mht6iH9-3AhhDWsMdyyjhPTGSTlEnMMBD31O-H06LAjkDZBtod59AYSxNjWnIRtKrBhafe2hMYSTCRMsNHpf7bdG92a5-E21jUelfsHIqw7T2lFPkKs_1UCbPk6YXQCpGVwTAGvgW_oP353ecw=".strip()
 
 client = TelegramClient(StringSession(MY_SESSION), API_ID, API_HASH)
 
@@ -47,7 +48,6 @@ async def main():
         print("=" * 40)
         print(f"🚨 هەڵەیەک ڕوویدا! ئەم هەڵەیە ببینە:")
         print(f"❌ هەڵەکە: {e}")
-        print(f"💡 چارەسەر: دەبێت هەژمارەکەت لە مۆبایل یان کۆمپیوتەر دەربچیت، یان لە Settings > Devices تێلێگرام ئەم سێشنه ببەستیت، پاشان دووبارە Deploy بکەیت.")
         print("=" * 40)
 
 asyncio.run(main())
