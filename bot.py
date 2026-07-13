@@ -1,14 +1,18 @@
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 import asyncio
-import os
 
+# ========= زانیارییەکان =========
 API_ID = 33790522
 API_HASH = "00e4131295f55452e143c06099c1ddae"
-SOURCE = "cciraq73"          # گۆڕدرا بۆ cciraq73
-TARGET = "xforcegroupBOT"    # گۆڕدرا بۆ xforcegroupBOT (بەبێ @)
+SOURCE = "cciraq73"
+TARGET = "xforcegroupBOT"
 
-client = TelegramClient(StringSession(os.getenv('SESSION_STRING')), API_ID, API_HASH)
+# ========= بەم شێوەیە String Sessionەکە ڕاستەوخۆ لێرە دەنووسیت =========
+# تکایە دڵنیابە کە دەقەکە ڕاستەوخۆ لە نێوان دوو کۆتەکەدا (") بێت
+MY_SESSION = "1ApWapzMBu7BaTWOFn9S0rvZIPvBmrs5rvknjLQNql8HIes-hnv6-eS98-LySykCXVBCtF6xVMBPY3FRnNWscQZ8dBs7s5NziCqdmhX-YbxzBR2Ja_fEyXn-AOaJRap9L3qXlVSJjN5-nMW4WIWzsFGm-HOxedvGPLUfRGSbR14WEfKI_DD0icd-gblfPflUVYAWCdvDBl1i9fqgt_gS4jEG6xSJtQvMCPO-mVjCaS__mrGEXTFymsEmNNwuYKhQD6wBG2oUBAP8VUFR2I9s_WIJU6fN9_DVutQX0ZScXxf5xW3Q64g0cLyi2xl7lW0rYDzpz06jkzXI0jyLUX5QNA0MCL12oMTM="
+
+client = TelegramClient(StringSession(MY_SESSION), API_ID, API_HASH)
 
 async def copy_message(target, msg):
     try:
